@@ -1,0 +1,25 @@
+=============================================================================
+ATS DX Catia DSLS Target ID Generator
+=============================================================================
+
+Este paquete genera el identificador necesario (Target ID) para las
+licencias de Catia. El script recopila el dato de la maquina y lo 
+guarda en un archivo de texto.
+
+INSTRUCCIONES DE USO:
+1. Extraiga todo el contenido de este ZIP en una misma carpeta.
+2. Ejecute el archivo "ATS_Generar_DSLS_Target_Windows.bat".
+3. Lea los avisos por pantalla. 
+4. Presione intro cuando se le solicite para finalizar el proceso.
+5. Se generara un archivo llamado "targetDSLS.txt" en esta misma carpeta.
+6. Envie el archivo "targetDSLS.txt" a quien se lo haya solicitado (Soporte).
+
+REQUISITOS IMPORTANTES:
+- Privilegios: Se recomienda ejecutar el BAT como Administrador para 
+  evitar errores de escritura en el registro de Windows.
+- Entorno: Catia solo permite la activacion en MAQUINAS FISICAS. Si
+  ejecuta este script en un entorno virtual (VMware, VirtualBox, AWS,
+  Azure, etc.), el proceso se bloqueara por seguridad.
+
+SOPORTE:
+Ante cualquier duda, contacte con Soporte@ats-global.com
