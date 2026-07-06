@@ -1,0 +1,43 @@
+=============================================================================
+ATS DX Composite ID Generator
+=============================================================================
+
+Este paquete contiene la herramienta para generar el identificador 'Composite ID' 
+necesario para el licenciamiento de productos Siemens, adaptado para entornos 
+físicos, locales (VMware/Hyper-V) y Cloud (AWS/Azure).
+
+=========================
+ INSTRUCCIONES DE USO
+=========================
+
+1. Extraiga TODO el contenido de este archivo ZIP en una carpeta de su disco duro.
+   (No ejecute los archivos directamente desde el ZIP, ya que fallarán).
+
+2. Seleccione el ejecutable correspondiente a su Sistema Operativo:
+
+   PARA USUARIOS DE WINDOWS:
+   -------------------------
+   -> Haga doble clic en el archivo "ATS_Generar_Composite_Windows.bat".
+      Aparecerá un menú con varias opciones. Seleccione la que corresponda a 
+      su entorno. Si no está seguro, elija la Opción 1.
+
+   PARA USUARIOS DE LINUX:
+   -----------------------
+   -> Abra un terminal, navegue hasta esta carpeta y ejecute:
+      bash ATS_Generar_Composite_Linux.sh
+      Aparecerá un menú con varias opciones. Seleccione la que corresponda a 
+      su entorno. Si no está seguro, elija la Opción 1.
+
+3. Envío del resultado:
+   Al finalizar correctamente el proceso, se generará un archivo llamado:
+   "composite.txt" en esta misma carpeta.
+   
+   Por favor, envíe este archivo "composite.txt" a la persona que se lo haya 
+   solicitado o adjúntelo a su ticket de soporte.
+
+=========================
+ SOPORTE TÉCNICO
+=========================
+Si tiene problemas o dudas al generar el identificador, contacte con:
+Email: Soporte@ats-global.com
+Teléfono: 945 298 229 (ATS Global Spain)
