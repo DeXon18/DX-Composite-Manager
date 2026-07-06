@@ -198,9 +198,6 @@ function Complete-Process {
     Write-Host '   Por favor envie el fichero targetDSLS.txt a quien se lo haya solicitado.' -ForegroundColor $script:Colors.Text
     Write-Host '   En caso de duda, enviarlo a Soporte@ats-global.com' -ForegroundColor $script:Colors.Text
     Write-Host ''
-
-    Write-Host '   Pulse una tecla para continuar...' -ForegroundColor $script:Colors.Info
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
 
 # ==============================================================================
