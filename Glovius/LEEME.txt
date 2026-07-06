@@ -1,0 +1,17 @@
+=============================================================================
+GLOVIUS :: Host ID Generator (MAC)
+=============================================================================
+
+Este paquete extrae el identificador fisico (MAC Address) necesario 
+para generar las licencias de Glovius.
+
+INSTRUCCIONES DE USO:
+1. Extraiga todo el contenido de este ZIP en una misma carpeta.
+2. Ejecute el archivo "ATS_Generar_Glovius_Windows.bat".
+3. Lea los avisos por pantalla. 
+4. Presione intro cuando se le solicite para finalizar el proceso.
+5. Se generara un archivo llamado "Glovius Host ID.txt" en esta misma carpeta.
+6. Envie el archivo de texto a quien se lo haya solicitado (Soporte).
+
+SOPORTE:
+Ante cualquier duda, contacte con Soporte@ats-global.com

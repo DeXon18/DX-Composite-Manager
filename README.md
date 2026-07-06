@@ -33,11 +33,17 @@ Contiene los scripts y binarios para extraer el **DSLS Target ID** (usado por el
   - Catia **solo** permite licencias en máquinas físicas. El script incluye un bloqueo de seguridad que detiene el proceso si detecta que se ejecuta en una máquina virtual.
   - Verifica si el usuario tiene privilegios de **Administrador** para evitar errores al intentar escribir en el registro de Windows.
 
+### 3. Glovius (`/Glovius`)
+Extrae directamente el **Host ID (MAC Address)** de los adaptadores físicos de red en Windows. No requiere binarios externos.
+
+- **Soporte Windows**: Script nativo en PowerShell (`.ps1` y `.bat`).
+- **Ultraligero**: No usa `getcid.exe`. Lee las direcciones MAC directamente con comandos del sistema.
+
 ## Instrucciones Generales de Uso (Usuarios finales)
 
 Cada carpeta incluye su propio archivo `LEEME.txt` con instrucciones detalladas, pero el proceso general es:
 
-1. Extraer el archivo `.zip` correspondiente (`Siemens` o `Catia`) en una misma carpeta local.
+1. Extraer el archivo `.zip` correspondiente (`Siemens`, `Catia` o `Glovius`) en una misma carpeta local.
 2. Ejecutar el archivo lanzador correspondiente (por ejemplo: `ATS_Generar_Composite_Windows.bat` o `ATS_Generar_DSLS_Target_Windows.bat`).
 3. (Opcional) En el caso de Siemens, seleccionar la opción deseada en el menú.
 4. Seguir las instrucciones en pantalla.
