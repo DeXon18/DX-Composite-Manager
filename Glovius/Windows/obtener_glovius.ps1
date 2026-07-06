@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # GLOVIUS :: Host ID Generator (MAC)
 # ==============================================================================
 #Requires -Version 5.1
@@ -33,7 +33,7 @@ function Show-AtsDxHeader {
 
     $pad = [Math]::Max(0, 61 - 28)
     Write-Host (' ' * $pad) -NoNewline
-    Write-Host '  █' -ForegroundColor $script:Colors.Frame
+    Write-Host '            █' -ForegroundColor $script:Colors.Frame
 
     Write-Host ' █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█' -ForegroundColor $script:Colors.Frame
     Write-Host ''
@@ -87,7 +87,7 @@ function Initialize-OutputFile {
 
 function Invoke-GetMac {
     Write-Section 'Obteniendo direccion MAC (Glovius Host ID)...'
-    
+
     Add-Lines @(
         ''
         '============================================================================='
@@ -138,7 +138,7 @@ function Complete-Process {
     Write-Host '   Por favor envie el fichero "Glovius Host ID.txt" a quien se lo haya solicitado.' -ForegroundColor $script:Colors.Text
     Write-Host '   En caso de duda, enviarlo a Soporte@ats-global.com' -ForegroundColor $script:Colors.Text
     Write-Host ''
-    
+
     Write-Host '   Pulse una tecla para continuar...' -ForegroundColor $script:Colors.Info
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
