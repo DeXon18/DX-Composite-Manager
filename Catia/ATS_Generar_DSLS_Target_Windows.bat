@@ -5,8 +5,7 @@ TITLE ATS DX DSLS Target ID Generator
 
 set "BASE_DIR=%~dp0"
 
-echo "%BASE_DIR%" | find /i "\AppData\Local\Temp" >nul
-if not errorlevel 1 (
+if not "%BASE_DIR:\AppData\Local\Temp=%"=="%BASE_DIR%" (
     echo.
     echo ==============================================================================
     echo [ERROR] SE ESTA EJECUTANDO DESDE DENTRO DEL ARCHIVO ZIP (Carpeta Temporal)
