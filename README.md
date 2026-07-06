@@ -1,5 +1,11 @@
 # DX-Composite-Manager
 
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![ATS Global](https://img.shields.io/badge/ATS_Global-Company-003366?style=for-the-badge)
+
 **DX-Composite-Manager** es un conjunto de herramientas diseñadas para facilitar la obtención de identificadores de máquina únicos necesarios para la generación de licencias de software (Siemens y Dassault Systèmes). 
 
 Está pensado para ser ejecutado tanto por usuarios finales como por personal de soporte técnico (ATS Global), ofreciendo una interfaz clara, interactiva y robusta.
