@@ -24,27 +24,46 @@ detect_env() {
     fi
 
     if [ -f /sys/class/dmi/id/sys_vendor ]; then
-        local vendor=$(cat /sys/class/dmi/id/sys_vendor 2>/dev/null)
-        local product=$(cat /sys/class/dmi/id/product_name 2>/dev/null)
+        local vendor
+        local product
+
+        vendor="$(cat /sys/class/dmi/id/sys_vendor 2>/dev/null)"
+        product="$(cat /sys/class/dmi/id/product_name 2>/dev/null)"
 
         case "$vendor" in
-            *VMware*) ENV_CACHE="VMware" ;;
-            *Amazon*) ENV_CACHE="AWS" ;;
+            *VMware*)
+                ENV_CACHE="VMware"
+                ;;
+            *Amazon*)
+                ENV_CACHE="AWS"
+                ;;
+            *Google*)
+                ENV_CACHE="Google Cloud"
+                ;;
             *Microsoft*)
                 if [[ "$product" == *"Virtual Machine"* ]]; then
                     ENV_CACHE="Hyper-V / Azure"
                 else
-                    ENV_CACHE="Microsoft Físico"
+                    ENV_CACHE="Microsoft Fisico"
                 fi
                 ;;
-            *QEMU*|*KVM*) ENV_CACHE="KVM / QEMU" ;;
-            *Xen*) ENV_CACHE="Xen" ;;
-            *innotek*|*VirtualBox*) ENV_CACHE="VirtualBox" ;;
-            *) ENV_CACHE="Fisico o no identificado" ;;
+            *QEMU*|*KVM*)
+                ENV_CACHE="KVM / QEMU"
+                ;;
+            *Xen*)
+                ENV_CACHE="Xen"
+                ;;
+            *innotek*|*VirtualBox*)
+                ENV_CACHE="VirtualBox"
+                ;;
+            *)
+                ENV_CACHE="Fisico o no identificado"
+                ;;
         esac
     else
         ENV_CACHE="Fisico o no identificado"
     fi
+
     echo "$ENV_CACHE"
 }
 
@@ -53,7 +72,7 @@ show_header() {
     echo ""
     echo -e "${C_FRAME} █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█${C_RESET}"
     echo -e "${C_FRAME} █  ${C_TEXT}ATS DX ${C_FRAME}:: ATS DX Composite ID Generator (Linux)                          █${C_RESET}"
-    echo -e "${C_FRAME} █  \033[0;36mSIEMENS \033[1;37m:: Ecosistema de Digital Industries Software y Gestión PLM       ${C_FRAME}█${C_RESET}"
+    echo -e "${C_FRAME} █  \033[0;36mSIEMENS \033[1;37m:: Ecosistema de Digital Industries Software y Gestion PLM       ${C_FRAME}█${C_RESET}"
     echo -e "${C_FRAME} █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█${C_RESET}"
     echo ""
     echo -e "${C_HEAD}   ATS GLOBAL SPAIN${C_RESET}"
@@ -69,12 +88,13 @@ show_menu() {
     echo ""
     echo -e "${C_TEXT}   Seleccione una opcion:${C_RESET}"
     echo ""
-    echo -e "${C_TEXT}   1. Generar todos los identificadores recomendados${C_RESET}"
-    echo -e "${C_TEXT}   2. Generar solo entorno Cloud automatico${C_RESET}"
-    echo -e "${C_TEXT}   3. Generar solo Microsoft Azure${C_RESET}"
-    echo -e "${C_TEXT}   4. Generar solo entorno virtual/local no Cloud${C_RESET}"
-    echo -e "${C_TEXT}   5. Ayuda: ¿Para que sirve cada opcion?${C_RESET}"
-    echo -e "${C_TEXT}   6. Salir${C_RESET}"
+    echo -e "${C_TEXT}   1. Licencia Estandar (Maquina fisica o virtual local)${C_RESET}"
+    echo -e "${C_TEXT}   2. Licencia Solid Edge (Node locked)${C_RESET}"
+    echo -e "${C_TEXT}   3. Licencia Cloud Automatico (AWS / Google Cloud)${C_RESET}"
+    echo -e "${C_TEXT}   4. Licencia Cloud Especifico (Microsoft Azure)${C_RESET}"
+    echo -e "${C_TEXT}   5. Generar TODOS los identificadores (Solo si soporte lo pide)${C_RESET}"
+    echo -e "${C_TEXT}   6. Ayuda: ¿Cual elijo?${C_RESET}"
+    echo -e "${C_TEXT}   7. Salir${C_RESET}"
     echo ""
 }
 
@@ -82,12 +102,13 @@ show_help() {
     show_header
     echo ""
     echo -e "   ${C_INFO}--- AYUDA DE OPCIONES ---${C_RESET}"
-    echo -e "   ${C_TEXT}1. Todos recomendados: Ejecuta todos los chequeos. Ideal si dudas.${C_RESET}"
-    echo -e "   ${C_TEXT}2. Entorno Cloud: Para maquinas AWS o Google Cloud.${C_RESET}"
-    echo -e "   ${C_TEXT}3. Azure: Exclusivo para maquinas virtuales en Microsoft Azure.${C_RESET}"
-    echo -e "   ${C_TEXT}4. No Cloud: Para maquinas fisicas o virtuales locales (VMware/VirtualBox). Salta la nube.${C_RESET}"
+    echo -e "   ${C_TEXT}1. Licencia Estandar: Para maquinas fisicas o virtuales locales, como VMware o VirtualBox.${C_RESET}"
+    echo -e "   ${C_TEXT}2. Solid Edge: Usa identificador composite2 para licencias Node locked.${C_RESET}"
+    echo -e "   ${C_TEXT}3. Entorno Cloud: Para maquinas AWS o Google Cloud.${C_RESET}"
+    echo -e "   ${C_TEXT}4. Azure: Exclusivo para maquinas virtuales en Microsoft Azure.${C_RESET}"
+    echo -e "   ${C_TEXT}5. Todos: Ejecuta todos los chequeos. Usar solo si soporte lo solicita.${C_RESET}"
     echo ""
-    read -p "   Pulse Enter para volver al menu..."
+    read -r -p "   Pulse Enter para volver al menu..."
 }
 
 init_file() {
@@ -95,7 +116,7 @@ init_file() {
     echo "ATS DX Composite ID Generator (Linux)" >> "$OUT_FILE"
     echo "Fecha: $(date '+%Y-%m-%d %H:%M:%S')" >> "$OUT_FILE"
     echo "Equipo: $(hostname)" >> "$OUT_FILE"
-    echo "Usuario: $USER" >> "$OUT_FILE"
+    echo "Usuario: ${USER:-desconocido}" >> "$OUT_FILE"
     echo "Ruta: $BASE_DIR" >> "$OUT_FILE"
     echo "Entorno detectado: $(detect_env)" >> "$OUT_FILE"
     echo "" >> "$OUT_FILE"
@@ -104,6 +125,13 @@ init_file() {
 invoke_getcid() {
     local title="$1"
     local arg="$2"
+    local tmp_file
+    local pid
+    local exit_code
+    local spin='|/-\'
+    local i=0
+
+    tmp_file="$(mktemp)"
 
     echo -e "\n   ${C_INFO}$title${C_RESET}"
     echo -e "${C_BRAND}   --------------------------------------------------------------------------${C_RESET}"
@@ -111,35 +139,36 @@ invoke_getcid() {
     echo "" >> "$OUT_FILE"
     echo "=============================================================================" >> "$OUT_FILE"
     echo "$title" >> "$OUT_FILE"
-    echo "Comando: getcid $arg" >> "$OUT_FILE"
+    echo "Comando: getcid $arg -nopause" >> "$OUT_FILE"
     echo "=============================================================================" >> "$OUT_FILE"
 
     echo -ne "   ${C_INFO}[..] Ejecutando... espere${C_RESET}"
 
-    "$GETCID_PATH" $arg -nopause > /tmp/getcid_out.tmp 2>&1 &
-    local pid=$!
+    "$GETCID_PATH" "$arg" -nopause > "$tmp_file" 2>&1 &
+    pid=$!
 
-    local spin='|/-\'
-    local i=0
-    while kill -0 $pid 2>/dev/null; do
-        i=$(( (i+1) %4 ))
-        printf "\r   ${C_INFO}[${spin:$i:1}] Ejecutando... espere${C_RESET}"
+    while kill -0 "$pid" 2>/dev/null; do
+        i=$(( (i + 1) % 4 ))
+        printf "\r   ${C_INFO}[%s] Ejecutando... espere${C_RESET}" "${spin:$i:1}"
         sleep 0.1
     done
-    wait $pid
-    local exit_code=$?
+
+    wait "$pid"
+    exit_code=$?
 
     printf "\r                                              \r"
 
-    if [ ! -s /tmp/getcid_out.tmp ]; then
+    if [ ! -s "$tmp_file" ]; then
         echo -e "   ${C_WARN}[AVISO] Sin salida.${C_RESET}"
         echo "[AVISO] Sin salida." >> "$OUT_FILE"
+        rm -f "$tmp_file"
         return 1
     fi
 
-    cat /tmp/getcid_out.tmp >> "$OUT_FILE"
+    cat "$tmp_file" >> "$OUT_FILE"
+    rm -f "$tmp_file"
 
-    if [ $exit_code -eq 0 ]; then
+    if [ "$exit_code" -eq 0 ]; then
         echo -e "   ${C_SUCC}[OK] Datos generados correctamente.${C_RESET}"
         return 0
     else
@@ -174,22 +203,39 @@ if [ ! -f "$GETCID_PATH" ]; then
     exit 1
 fi
 
+if [ ! -x "$GETCID_PATH" ]; then
+    echo -e "   ${C_WARN}[AVISO] El binario getcid no tiene permisos de ejecucion.${C_RESET}"
+    echo -e "   ${C_TEXT}Intentando aplicar permisos automaticamente...${C_RESET}"
+    chmod +x "$GETCID_PATH" 2>/dev/null
+
+    if [ ! -x "$GETCID_PATH" ]; then
+        echo -e "   ${C_ERR}[ERROR] No se pudieron aplicar permisos de ejecucion a getcid.${C_RESET}"
+        echo ""
+        echo -e "   ${C_TEXT}Ejecute manualmente:${C_RESET}"
+        echo -e "   ${C_VERS}chmod +x \"$GETCID_PATH\"${C_RESET}"
+        echo ""
+        exit 1
+    fi
+fi
+
 while true; do
     show_menu
-    read -p "   Introduzca una opcion: " option
+    read -r -p "   Introduzca una opcion: " option
 
-    if [ "$option" = "6" ]; then
+    if [ "$option" = "7" ]; then
         echo ""
         echo -e "   ${C_WARN}Proceso cancelado por el usuario.${C_RESET}"
         echo ""
         exit 0
-    elif [ "$option" = "5" ]; then
+    elif [ "$option" = "6" ]; then
         show_help
         continue
     fi
 
     case "$option" in
-        1|2|3|4) break ;;
+        1|2|3|4|5)
+            break
+            ;;
         *)
             echo ""
             echo -e "   ${C_ERR}Opcion no valida. Intentelo de nuevo.${C_RESET}"
@@ -203,18 +249,21 @@ init_file
 
 case "$option" in
     1)
-        invoke_getcid "Todos los IDs recomendados" "-allcomposite"
-        invoke_getcid "Entorno Cloud automatico" "-cloud"
-        invoke_getcid "Microsoft Azure" "-azure"
         invoke_getcid "Entorno virtual/local no Cloud" "-nocloud"
         ;;
     2)
-        invoke_getcid "Entorno Cloud automatico" "-cloud"
+        invoke_getcid "Generar Solid Edge (composite2)" "-composite2"
         ;;
     3)
-        invoke_getcid "Microsoft Azure" "-azure"
+        invoke_getcid "Entorno Cloud automatico" "-cloud"
         ;;
     4)
+        invoke_getcid "Microsoft Azure" "-azure"
+        ;;
+    5)
+        invoke_getcid "Todos los IDs recomendados" "-allcomposite"
+        invoke_getcid "Entorno Cloud automatico" "-cloud"
+        invoke_getcid "Microsoft Azure" "-azure"
         invoke_getcid "Entorno virtual/local no Cloud" "-nocloud"
         ;;
 esac

@@ -24,17 +24,19 @@ $script:Colors = @{
 }
 
 $script:CidTasks = @{
-    All     = @{ Title = 'Todos los IDs recomendados'; Argument = '-allcomposite' }
-    Cloud   = @{ Title = 'Entorno Cloud automatico'; Argument = '-cloud' }
-    Azure   = @{ Title = 'Microsoft Azure'; Argument = '-azure' }
-    NoCloud = @{ Title = 'Entorno virtual/local no Cloud'; Argument = '-nocloud' }
+    All       = @{ Title = 'Todos los IDs recomendados'; Argument = '-allcomposite' }
+    Cloud     = @{ Title = 'Entorno Cloud automatico'; Argument = '-cloud' }
+    Azure     = @{ Title = 'Microsoft Azure'; Argument = '-azure' }
+    NoCloud   = @{ Title = 'Entorno virtual/local no Cloud'; Argument = '-nocloud' }
+    SolidEdge = @{ Title = 'Generar Solid Edge (composite2)'; Argument = '-composite2' }
 }
 
 $script:MenuActions = @{
-    '1' = @('All', 'Cloud', 'Azure', 'NoCloud')
-    '2' = @('Cloud')
-    '3' = @('Azure')
-    '4' = @('NoCloud')
+    '1' = @('NoCloud')
+    '2' = @('SolidEdge')
+    '3' = @('Cloud')
+    '4' = @('Azure')
+    '5' = @('All', 'Cloud', 'Azure', 'NoCloud')
 }
 
 function Show-AtsDxHeader {
@@ -219,10 +221,11 @@ function Show-Help {
     Show-AtsDxHeader
     Write-Host ''
     Write-Host '   --- AYUDA DE OPCIONES ---' -ForegroundColor $script:Colors.Info
-    Write-Host '   1. Todos recomendados: Ejecuta todos los chequeos. Ideal si dudas.' -ForegroundColor $script:Colors.Text
-    Write-Host '   2. Entorno Cloud: Para maquinas AWS o Google Cloud.' -ForegroundColor $script:Colors.Text
-    Write-Host '   3. Azure: Exclusivo para maquinas virtuales en Microsoft Azure.' -ForegroundColor $script:Colors.Text
-    Write-Host '   4. No Cloud: Para maquinas fisicas o virtuales locales VMware/VirtualBox. Salta la nube.' -ForegroundColor $script:Colors.Text
+    Write-Host '   1. Licencia Estandar: Para maquinas fisicas o virtuales locales (VMware/VirtualBox).' -ForegroundColor $script:Colors.Text
+    Write-Host '   2. Solid Edge: Usa identificador composite2 (para licencias Node locked).' -ForegroundColor $script:Colors.Text
+    Write-Host '   3. Entorno Cloud: Para maquinas AWS o Google Cloud.' -ForegroundColor $script:Colors.Text
+    Write-Host '   4. Azure: Exclusivo para maquinas virtuales en Microsoft Azure.' -ForegroundColor $script:Colors.Text
+    Write-Host '   5. Todos: Ejecuta todos los chequeos. Ideal si soporte te lo pide.' -ForegroundColor $script:Colors.Text
     Write-Host ''
     Read-Host '   Pulse Enter para volver al menu'
 }
@@ -234,12 +237,13 @@ function Show-Menu {
     Write-Host ''
     Write-Host '   Seleccione una opcion:' -ForegroundColor $script:Colors.Text
     Write-Host ''
-    Write-Host '   1. Generar todos los identificadores recomendados' -ForegroundColor $script:Colors.Text
-    Write-Host '   2. Generar solo entorno Cloud automatico' -ForegroundColor $script:Colors.Text
-    Write-Host '   3. Generar solo Microsoft Azure' -ForegroundColor $script:Colors.Text
-    Write-Host '   4. Generar solo entorno virtual/local no Cloud' -ForegroundColor $script:Colors.Text
-    Write-Host '   5. Ayuda: Explicacion de cada opcion' -ForegroundColor $script:Colors.Text
-    Write-Host '   6. Salir' -ForegroundColor $script:Colors.Text
+    Write-Host '   1. Licencia Estandar (Maquina fisica o virtual local)' -ForegroundColor $script:Colors.Text
+    Write-Host '   2. Licencia Solid Edge (Node locked)' -ForegroundColor $script:Colors.Text
+    Write-Host '   3. Licencia Cloud Automatico (AWS / Google Cloud)' -ForegroundColor $script:Colors.Text
+    Write-Host '   4. Licencia Cloud Especifico (Microsoft Azure)' -ForegroundColor $script:Colors.Text
+    Write-Host '   5. Generar TODOS los identificadores (Solo si soporte lo pide)' -ForegroundColor $script:Colors.Text
+    Write-Host '   6. Ayuda: ¿Cual elijo?' -ForegroundColor $script:Colors.Text
+    Write-Host '   7. Salir' -ForegroundColor $script:Colors.Text
     Write-Host ''
 }
 
@@ -288,14 +292,14 @@ while ($true) {
     Show-Menu
     $option = (Read-Host '   Introduzca una opcion').Trim()
 
-    if ($option -eq '6') {
+    if ($option -eq '7') {
         Write-Host ''
         Write-Warn 'Proceso cancelado por el usuario.'
         Write-Host ''
         exit 0
     }
 
-    if ($option -eq '5') {
+    if ($option -eq '6') {
         Show-Help
         continue
     }
