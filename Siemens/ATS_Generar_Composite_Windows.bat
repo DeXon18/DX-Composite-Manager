@@ -5,7 +5,7 @@ TITLE ATS DX Composite Generator
 
 set "BASE_DIR=%~dp0"
 
-echo "%BASE_DIR%" | find /i "%TEMP%" >nul
+echo "%BASE_DIR%" | find /i "\AppData\Local\Temp" >nul
 if not errorlevel 1 (
     echo.
     echo ==============================================================================
